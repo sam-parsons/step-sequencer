@@ -2,21 +2,23 @@ import React from "react";
 import StepSequence from "./Components/StepSequence";
 import "./App.css";
 
-function toggleBox(priorChecked, i) {
+function toggleBox(priorChecked, i, row) {
   const checked = [...priorChecked];
-  checked[i] = !checked[i];
+  checked[row][i] = !checked[row][i];
   return checked;
 }
 
 export default class App extends React.PureComponent {
   state = {
-    checked: [false, true, true, false, false, true, true, false]
+    checked: [
+      [false, true, true, false, false, true, true, false],
+      [true, true, false, false, true, true, false, false]
+    ]
   };
 
-  onToggleBox = i => {
-    // console.info({ i, value });
+  onToggleBox = (i, row) => {
     this.setState(prior => ({
-      checked: toggleBox(prior.checked, i)
+      checked: toggleBox(prior.checked, i, row)
     }));
   };
 
