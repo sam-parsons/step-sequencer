@@ -1,5 +1,6 @@
 import React from "react";
 import StepSequence from "./Components/StepSequence";
+import Buttons from "./Components/Buttons";
 import "./App.css";
 
 function toggleBox(priorChecked, i, row) {
@@ -11,9 +12,10 @@ function toggleBox(priorChecked, i, row) {
 export default class App extends React.PureComponent {
   state = {
     checked: [
-      [false, true, true, false, false, true, true, false],
-      [true, true, false, false, true, true, false, false]
-    ]
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false]
+    ],
+    isPlaying: false
   };
 
   onToggleBox = (i, row) => {
@@ -26,6 +28,7 @@ export default class App extends React.PureComponent {
     return (
       <div className="App">
         <header className="App-header">
+          <Buttons isPlaying={this.state.isPlaying} />
           <StepSequence
             checked={this.state.checked}
             onToggle={this.onToggleBox}
