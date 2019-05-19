@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: hsl(240, 5%, 22%);
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.box:hover {
+  background: #787885;
+}
+
+.checked {
+  background: #cbff8b;
+}
+
+.checked:hover {
+  background: #f2ffe2;
+}
