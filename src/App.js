@@ -24,11 +24,20 @@ export default class App extends React.PureComponent {
     }));
   };
 
+  onTogglePlay = () => {
+    this.setState(prior => ({
+      isPlaying: !prior.isPlaying
+    }));
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <Buttons isPlaying={this.state.isPlaying} />
+          <Buttons
+            isPlaying={this.state.isPlaying}
+            onTogglePlay={this.onTogglePlay}
+          />
           <StepSequence
             checked={this.state.checked}
             onToggle={this.onToggleBox}
