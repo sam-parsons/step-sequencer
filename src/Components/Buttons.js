@@ -3,7 +3,7 @@ import PlayButton from "./PlayButton";
 import TimeSignature from "./TimeSignature";
 import TempoSlider from "./TempoSlider";
 import TempoDisplay from "./TempoDisplay";
-import TapTempo from "./TapTempo";
+// import TapTempo from "./TapTempo";
 import ResetButton from "./ResetButton";
 import styles from "./Buttons.module.css";
 

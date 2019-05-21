@@ -44,8 +44,7 @@ export default class App extends React.PureComponent {
   };
 
   componentDidMount = () => {
-    Tone.Transport.start();
-
+    // Tone.Transport.start();
     this.generateMetronome();
   };
 
@@ -67,48 +66,39 @@ export default class App extends React.PureComponent {
       }),
       () => {
         if (!this.state.isPlaying) {
-          //stop transport
+          //stop transport, turn off looping - prevents collision with measure sequence loop
           Tone.Transport.stop();
-          console.log("playing stopped");
-
-          // turn off looping - prevents collision with measure sequence loop
           Tone.Transport.loop = false;
           Tone.Transport.loopEnd = 0;
+          console.log("stopped");
         } else {
           // configure looping for step sequencer
           Tone.Transport.loop = true;
           Tone.Transport.loopStart = 0;
           Tone.Transport.loopEnd =
-            (this.state.sequenceLength * 30) / this.state.tempo; // magic equation
-
-          // start transport after loop config
+            (this.state.sequenceLength * 30) / this.state.tempo;
           Tone.Transport.start("+0.0");
-          console.log("playing initiated");
+          console.log("now playing");
         }
       }
     );
   };
 
-  restartPlaying() {
+  restartPlaying = () => {
     if (this.state.isPlaying) {
       this.setState({ isPlaying: this.state.isPlaying }, () => {
-        //stop transport
         Tone.Transport.stop();
-
-        // configure looping for step sequencer
         Tone.Transport.loopStart = 0;
         Tone.Transport.loopEnd =
-          (this.state.sequenceLength * 30) / this.state.tempo; // magic equation
+          (this.state.sequenceLength * 30) / this.state.tempo;
         Tone.Transport.loop = true;
-
-        // start transport after loop config
         Tone.Transport.start("+0.0");
         console.log("playing restarted");
       });
     } else {
       console.error("restartPlaying called while not playing");
     }
-  }
+  };
 
   onLengthChange = sequenceLength => {
     const checked = [[], []];
@@ -122,6 +112,7 @@ export default class App extends React.PureComponent {
         checked
       }),
       () => {
+        Tone.Transport.loopEnd = (sequenceLength * 30) / this.state.tempo;
         this.generateMetronome();
       }
     );
@@ -147,10 +138,22 @@ export default class App extends React.PureComponent {
         checked: prior.defaults.checked
       }),
       () => {
-        console.log(this.state.checked);
+        this.resetTempo();
+        this.forceStop();
         this.onLengthChange(this.state.sequenceLength);
       }
     );
+  };
+
+  forceStop = () => {
+    Tone.Transport.stop();
+    Tone.Transport.loop = false;
+    Tone.Transport.loopEnd = 0;
+    console.log("force stopped");
+  };
+
+  resetTempo = () => {
+    Tone.Transport.bpm.value = this.state.defaults.tempo;
   };
 
   handleTap = () => {
@@ -201,6 +204,7 @@ export default class App extends React.PureComponent {
     // create new Part, start Part, push Part to container
     const part = new Tone.Part((time, value) => {
       synth.triggerAttackRelease(value.note, 0.05, time, value.velocity);
+      console.log("sound");
     }, renderedNotes).start(0);
     partContainer.push(part);
 
@@ -234,5 +238,3 @@ export default class App extends React.PureComponent {
     );
   }
 }
-
-// export default App;
