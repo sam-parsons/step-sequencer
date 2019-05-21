@@ -7,7 +7,7 @@ const TimeSignature = props => (
       name="length"
       id="row-length"
       className={styles.length}
-      defaultValue="8"
+      value={props.sequenceLength}
       onChange={e => {
         props.onLengthChange(e.target.value);
       }}
