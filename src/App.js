@@ -1,6 +1,7 @@
 import React from "react";
 import StepSequence from "./Components/StepSequence";
 import Buttons from "./Components/Buttons";
+import Tone from "tone";
 import "./App.css";
 
 function toggleBox(priorChecked, i, row) {
@@ -17,7 +18,23 @@ export default class App extends React.PureComponent {
     ],
     isPlaying: false,
     sequenceLength: 8,
-    tempo: 120
+    tempo: 120,
+    elapsedTime: 0,
+    lastTime: 0,
+    numberOfTaps: 0,
+    averageBPM: 0,
+    defaults: {
+      tempo: 120,
+      sequenceLength: 8,
+      isPlaying: false,
+      elapsedTime: 0,
+      numberOfTaps: 0,
+      averageBPM: 0
+    }
+  };
+
+  componentDidMount = () => {
+    Tone.Transport.start();
   };
 
   onToggleBox = (i, row) => {
@@ -45,12 +62,28 @@ export default class App extends React.PureComponent {
   };
 
   onTempoChange = tempo => {
+    this.setState({
+      tempo
+    });
+  };
+
+  onReset = () => {
     this.setState(
-      {
-        tempo
-      },
-      () => console.log(tempo)
+      prior => ({
+        tempo: prior.defaults.tempo,
+        sequenceLength: prior.defaults.sequenceLength,
+        isPlaying: prior.defaults.isPlaying
+      }),
+      () => this.onLengthChange(this.state.sequenceLength)
     );
+  };
+
+  handleTap = () => {
+    const elapsedTime = Tone.Transport.seconds - this.state.lastTime;
+    const lastTime = Tone.Transport.seconds;
+    const tempo =
+      elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
+    this.setState({ elapsedTime, tempo, lastTime });
   };
 
   render() {
@@ -64,6 +97,8 @@ export default class App extends React.PureComponent {
             onLengthChange={this.onLengthChange}
             tempo={this.state.tempo}
             onTempoChange={this.onTempoChange}
+            onReset={this.onReset}
+            handleTap={this.handleTap}
           />
           <StepSequence
             checked={this.state.checked}
