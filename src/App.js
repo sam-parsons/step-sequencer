@@ -6,6 +6,7 @@ import "./App.css";
 
 function toggleBox(priorChecked, i, row) {
   const checked = [...priorChecked];
+  console.log(checked);
   checked[row][i] = !checked[row][i];
   return checked;
 }
@@ -112,8 +113,8 @@ export default class App extends React.PureComponent {
   onLengthChange = sequenceLength => {
     const checked = [[], []];
     for (let i = 0; i < sequenceLength; i++) {
-      checked[0].push(false);
-      checked[1].push(false);
+      checked[0].push(i === 0);
+      checked[1].push(i !== 0 && i % 2 === 0);
     }
     this.setState(
       () => ({
@@ -122,7 +123,6 @@ export default class App extends React.PureComponent {
       }),
       () => {
         this.generateMetronome();
-        this.onTogglePlay();
       }
     );
   };
@@ -147,8 +147,8 @@ export default class App extends React.PureComponent {
         checked: prior.defaults.checked
       }),
       () => {
+        console.log(this.state.checked);
         this.onLengthChange(this.state.sequenceLength);
-        this.generateMetronome();
       }
     );
   };
@@ -172,7 +172,6 @@ export default class App extends React.PureComponent {
     const [note1, note2] = this.state.notes;
     const seqLength = this.state.sequenceLength;
     const matrix = this.state.checked;
-    const tempo = this.state.tempo;
 
     // new renderedNotes array, populate
     const renderedNotes = [];
@@ -198,7 +197,6 @@ export default class App extends React.PureComponent {
         });
       }
     }
-    console.log(renderedNotes);
 
     // create new Part, start Part, push Part to container
     const part = new Tone.Part((time, value) => {
