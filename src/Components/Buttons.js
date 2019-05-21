@@ -15,7 +15,7 @@ const Buttons = props => (
       onLengthChange={props.onLengthChange}
     />
     <ResetButton onReset={props.onReset} />
-    <TapTempo handleTap={props.handleTap} />
+    {/* <TapTempo handleTap={props.handleTap} /> */}
     <TempoDisplay tempo={props.tempo} />
     <TempoSlider tempo={props.tempo} onTempoChange={props.onTempoChange} />
   </div>
