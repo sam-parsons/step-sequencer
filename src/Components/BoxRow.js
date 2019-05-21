@@ -14,6 +14,7 @@ const BoxRow = props => (
           .compact()
           .join(" ")
           .value()}
+        key={i}
       />
     ))}
   </div>

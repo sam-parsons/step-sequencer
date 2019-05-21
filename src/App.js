@@ -44,7 +44,6 @@ export default class App extends React.PureComponent {
   };
 
   componentDidMount = () => {
-    // Tone.Transport.start();
     this.generateMetronome();
   };
 
@@ -78,7 +77,7 @@ export default class App extends React.PureComponent {
           Tone.Transport.loopEnd =
             (this.state.sequenceLength * 30) / this.state.tempo;
           Tone.Transport.start("+0.0");
-          console.log("now playing");
+          console.log("playing");
         }
       }
     );
@@ -157,10 +156,9 @@ export default class App extends React.PureComponent {
   };
 
   handleTap = () => {
-    const elapsedTime = Tone.Transport.seconds - this.state.lastTime;
-    const lastTime = Tone.Transport.seconds;
-    const tempo =
-      elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
+    const elapsedTime = Tone.Transport.seconds - this.state.lastTime,
+      lastTime = Tone.Transport.seconds,
+      tempo = elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
     this.setState({ elapsedTime, tempo, lastTime }, () =>
       this.onTempoChange(tempo)
     );
@@ -172,9 +170,9 @@ export default class App extends React.PureComponent {
     partContainer.forEach(part => part.removeAll());
 
     // metronome vitals
-    const [note1, note2] = this.state.notes;
-    const seqLength = this.state.sequenceLength;
-    const matrix = this.state.checked;
+    const [note1, note2] = this.state.notes,
+      seqLength = this.state.sequenceLength,
+      matrix = this.state.checked;
 
     // new renderedNotes array, populate
     const renderedNotes = [];
@@ -204,7 +202,6 @@ export default class App extends React.PureComponent {
     // create new Part, start Part, push Part to container
     const part = new Tone.Part((time, value) => {
       synth.triggerAttackRelease(value.note, 0.05, time, value.velocity);
-      console.log("sound");
     }, renderedNotes).start(0);
     partContainer.push(part);
 
