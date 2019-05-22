@@ -7,12 +7,18 @@ const StepSequence = props => (
       checked={props.checked}
       onToggle={props.onToggle}
       sequenceLength={props.sequenceLength}
+      onPitchSelect={props.onPitchSelect}
+      notes={props.notes}
+      pitchConversion={props.pitchConversion}
       row="0"
     />
     <BoxRow
       checked={props.checked}
       onToggle={props.onToggle}
       sequenceLength={props.sequenceLength}
+      onPitchSelect={props.onPitchSelect}
+      notes={props.notes}
+      pitchConversion={props.pitchConversion}
       row="1"
     />
   </div>

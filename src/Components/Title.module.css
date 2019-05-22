@@ -7,4 +7,9 @@
   font-family: "Audiowide", cursive;
   font-size: 40px;
   color: #b9ff62;
+  align-items: flex-end;
+}
+.info {
+  font-size: 15px;
+  color: white;
 }

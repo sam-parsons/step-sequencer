@@ -6,8 +6,6 @@
   </a>
 </p>
 
-<h1 align="center">Step Sequencer</h1>
-
 <a href="https://github.com/sam-parsons/react-step-sequencer">
   <img src="./assets/screenshot.gif" alt="screenshot" width="100%" />
 </a>

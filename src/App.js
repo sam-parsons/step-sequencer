@@ -5,7 +5,12 @@ import Title from "./Components/Title";
 import Tone from "tone";
 import "./App.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlay, faStop, faRecycle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlay,
+  faStop,
+  faRecycle,
+  faInfoCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 /**
  TODO
@@ -25,6 +30,23 @@ const synth = new Tone.PolySynth(2, Tone.Synth).toMaster();
 library.add(faPlay);
 library.add(faStop);
 library.add(faRecycle);
+library.add(faInfoCircle);
+
+const pitchConversion = [
+  "G4",
+  "Ab4",
+  "A4",
+  "Bb4",
+  "B4",
+  "C5",
+  "Db5",
+  "D5",
+  "Eb5",
+  "E5",
+  "F5",
+  "Gb5",
+  "G5"
+];
 
 export default class App extends React.PureComponent {
   state = {
@@ -37,7 +59,7 @@ export default class App extends React.PureComponent {
     tempo: 120,
     renderedNotes: [],
     partContainer: [],
-    notes: ["C5", "Eb5"],
+    notes: ["Eb5", "C5"],
     elapsedTime: 0,
     lastTime: 0,
     numberOfTaps: 0,
@@ -53,7 +75,22 @@ export default class App extends React.PureComponent {
         [true, false, false, false, false, false, false, false],
         [false, false, true, false, true, false, true, false]
       ]
-    }
+    },
+    pitchConversion: [
+      "G4",
+      "Ab4",
+      "A4",
+      "Bb4",
+      "B4",
+      "C5",
+      "Db5",
+      "D5",
+      "Eb5",
+      "E5",
+      "F5",
+      "Gb5",
+      "G5"
+    ]
   };
 
   componentDidMount = () => {
@@ -177,6 +214,16 @@ export default class App extends React.PureComponent {
     );
   };
 
+  onPitchSelect = (index, row) => {
+    const notes =
+      row === "0"
+        ? [pitchConversion[index], this.state.notes[1]]
+        : [this.state.notes[0], pitchConversion[index]]; // fix this conditional
+    this.setState({ notes }, () => {
+      this.generateMetronome();
+    });
+  };
+
   generateMetronome = () => {
     // erase or stop all previous parts
     const partContainer = this.state.partContainer;
@@ -192,20 +239,20 @@ export default class App extends React.PureComponent {
     for (let i = 0; i < seqLength; i++) {
       if (matrix[0][i]) {
         renderedNotes.push({
-          note: note2,
+          note: note1,
           time: `0:${i / 2}`,
           velocity: 0.05
         });
       } else if (!matrix[1][i]) {
         renderedNotes.push({
-          note: note2,
+          note: note1,
           time: `0:${i / 2}`,
           velocity: 0
         });
       }
       if (matrix[1][i]) {
         renderedNotes.push({
-          note: note1,
+          note: note2,
           time: `0:${i / 2}`,
           velocity: 0.05
         });
@@ -243,6 +290,9 @@ export default class App extends React.PureComponent {
             checked={this.state.checked}
             onToggle={this.onToggleBox}
             sequenceLength={this.state.sequenceLength}
+            onPitchSelect={this.onPitchSelect}
+            notes={this.state.notes}
+            pitchConversion={this.state.pitchConversion}
           />
         </header>
       </div>
