@@ -1,0 +1,10 @@
+.root {
+  padding: 0.5em;
+  background: #28282c;
+  border-radius: 2px;
+  display: flex;
+  margin-bottom: 1%;
+  font-family: "Audiowide", cursive;
+  font-size: 40px;
+  color: #b9ff62;
+}

@@ -4,6 +4,8 @@
   border-radius: 4px;
   display: flex;
   margin-bottom: 1%;
+  justify-content: space-between;
+  width: 450px;
 }
 .seqLength {
   font-size: 50%;

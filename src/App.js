@@ -1,15 +1,17 @@
 import React from "react";
 import StepSequence from "./Components/StepSequence";
 import Buttons from "./Components/Buttons";
+import Title from "./Components/Title";
 import Tone from "tone";
 import "./App.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlay, faStop, faRecycle } from "@fortawesome/free-solid-svg-icons";
 
 /**
-  TODO
-  - Visualizer
-  - Pitch Selection
-  - Tap Tempo
-  - Styling
+ TODO
+ - Visualizer
+ - Pitch Selection
+ - Tap Tempo
  */
 
 function toggleBox(priorChecked, i, row) {
@@ -19,6 +21,10 @@ function toggleBox(priorChecked, i, row) {
 }
 
 const synth = new Tone.PolySynth(2, Tone.Synth).toMaster();
+
+library.add(faPlay);
+library.add(faStop);
+library.add(faRecycle);
 
 export default class App extends React.PureComponent {
   state = {
@@ -222,6 +228,7 @@ export default class App extends React.PureComponent {
     return (
       <div className="App">
         <header className="App-header">
+          <Title />
           <Buttons
             isPlaying={this.state.isPlaying}
             onTogglePlay={this.onTogglePlay}

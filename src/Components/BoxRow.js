@@ -8,7 +8,6 @@ const BoxRow = props => (
       <div
         onClick={() => {
           props.onToggle(i, props.row);
-          console.log(props.checked);
         }}
         className={_.chain([styles.box, isBoxChecked && styles.checked])
           .compact()
