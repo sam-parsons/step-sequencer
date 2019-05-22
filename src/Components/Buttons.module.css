@@ -5,3 +5,9 @@
   display: flex;
   margin-bottom: 1%;
 }
+.seqLength {
+  font-size: 50%;
+}
+.tempoDisplay {
+  font-size: 50%;
+}

@@ -4,9 +4,16 @@ import Buttons from "./Components/Buttons";
 import Tone from "tone";
 import "./App.css";
 
+/**
+  TODO
+  - Visualizer
+  - Pitch Selection
+  - Tap Tempo
+  - Styling
+ */
+
 function toggleBox(priorChecked, i, row) {
   const checked = [...priorChecked];
-  console.log(checked);
   checked[row][i] = !checked[row][i];
   return checked;
 }
