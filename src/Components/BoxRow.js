@@ -8,7 +8,6 @@ const BoxRow = props => (
     <PitchSelect
       onPitchSelect={props.onPitchSelect}
       notes={props.notes}
-      pitchConversion={props.pitchConversion}
       row={props.row}
     />
     {_.map(props.checked[props.row], (isBoxChecked, i) => (

@@ -15,7 +15,7 @@ import {
 /**
  TODO
  - Visualizer
- - Pitch Selection
+ - Pitch Selection - make reset function work / prevent same note from being selected twice
  - Tap Tempo
  */
 
@@ -31,22 +31,6 @@ library.add(faPlay);
 library.add(faStop);
 library.add(faRecycle);
 library.add(faInfoCircle);
-
-const pitchConversion = [
-  "G4",
-  "Ab4",
-  "A4",
-  "Bb4",
-  "B4",
-  "C5",
-  "Db5",
-  "D5",
-  "Eb5",
-  "E5",
-  "F5",
-  "Gb5",
-  "G5"
-];
 
 export default class App extends React.PureComponent {
   state = {
@@ -74,23 +58,9 @@ export default class App extends React.PureComponent {
       checked: [
         [true, false, false, false, false, false, false, false],
         [false, false, true, false, true, false, true, false]
-      ]
-    },
-    pitchConversion: [
-      "G4",
-      "Ab4",
-      "A4",
-      "Bb4",
-      "B4",
-      "C5",
-      "Db5",
-      "D5",
-      "Eb5",
-      "E5",
-      "F5",
-      "Gb5",
-      "G5"
-    ]
+      ],
+      notes: ["Eb5", "C5"]
+    }
   };
 
   componentDidMount = () => {
@@ -184,12 +154,15 @@ export default class App extends React.PureComponent {
         tempo: prior.defaults.tempo,
         sequenceLength: prior.defaults.sequenceLength,
         isPlaying: prior.defaults.isPlaying,
-        checked: prior.defaults.checked
+        checked: prior.defaults.checked,
+        notes: prior.defaults.notes
       }),
       () => {
         this.resetTempo();
         this.forceStop();
         this.onLengthChange(this.state.sequenceLength);
+        this.onPitchSelect(this.state.notes[0], 0);
+        this.onPitchSelect(this.state.notes[1], 1);
       }
     );
   };
@@ -214,11 +187,9 @@ export default class App extends React.PureComponent {
     );
   };
 
-  onPitchSelect = (index, row) => {
+  onPitchSelect = (note, row) => {
     const notes =
-      row === "0"
-        ? [pitchConversion[index], this.state.notes[1]]
-        : [this.state.notes[0], pitchConversion[index]]; // fix this conditional
+      row === "0" ? [note, this.state.notes[1]] : [this.state.notes[0], note]; // fix this conditional
     this.setState({ notes }, () => {
       this.generateMetronome();
     });
@@ -292,7 +263,6 @@ export default class App extends React.PureComponent {
             sequenceLength={this.state.sequenceLength}
             onPitchSelect={this.onPitchSelect}
             notes={this.state.notes}
-            pitchConversion={this.state.pitchConversion}
           />
         </header>
       </div>
