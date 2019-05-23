@@ -1,7 +1,5 @@
 .root {
   display: flex;
-  /* width: 60px;
-  height: 60px; */
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
   cursor: pointer;

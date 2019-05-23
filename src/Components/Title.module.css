@@ -8,8 +8,16 @@
   font-size: 40px;
   color: #b9ff62;
   align-items: flex-end;
+  position: relative;
 }
 .info {
-  font-size: 15px;
-  color: white;
+  margin-top: 3%;
+  font-size: 12px;
+  color: rgb(148, 148, 148);
+  position: absolute;
+  right: 5px;
+}
+.link {
+  color: #baffa7;
+  text-decoration: none;
 }

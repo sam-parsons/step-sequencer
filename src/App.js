@@ -1,8 +1,9 @@
 import React from "react";
-import StepSequence from "./Components/StepSequence";
-import Buttons from "./Components/Buttons";
-import Title from "./Components/Title";
 import Tone from "tone";
+import _ from "lodash";
+import Title from "./Components/Title";
+import Buttons from "./Components/Buttons";
+import StepSequence from "./Components/StepSequence";
 import "./App.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -11,13 +12,12 @@ import {
   faRecycle,
   faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
-import _ from "lodash";
 
 /**
  TODO
  - Visualizer - must clear on stop, sometimes gets stuck on highlighted checked square
  - Pitch Selection - prevent same note from being selected twice
- - Tap Tempo - needs better accuracy - multiple previous time average rather than just previous and current
+ - Eliminate use of layout.css (possibly)
  */
 
 function toggleBox(priorChecked, i, row) {
@@ -26,9 +26,11 @@ function toggleBox(priorChecked, i, row) {
   return checked;
 }
 
+// what are correct places for these?
 const synth = new Tone.PolySynth(2, Tone.Synth).toMaster();
 const context = new AudioContext();
 
+// fontawesome library setup
 library.add(faPlay);
 library.add(faStop);
 library.add(faRecycle);
@@ -39,19 +41,15 @@ export default class App extends React.PureComponent {
     checked: [
       [true, true, false, false, false, false, false],
       [false, false, true, false, true, false, true]
-    ],
+    ], // sequencer pattern array
     isPlaying: false,
-    sequenceLength: 7,
+    sequenceLength: 7, // length of sequence pattern
     tempo: 120,
-    isActive: [[0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0]],
+    isActive: [[0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0]], // used for highlighting suring visualization
     renderedNotes: [],
-    partContainer: [],
+    partContainer: [], // store Part object for future removal
     notes: ["Eb5", "C5"],
-    elapsedTime: 0,
-    lastTime: 0,
-    numberOfTaps: 0,
-    averageBPM: 0,
-    timeContainer: [],
+    timeContainer: [], // tap tempo array
     defaults: {
       tempo: 120,
       sequenceLength: 8,
@@ -82,8 +80,6 @@ export default class App extends React.PureComponent {
         }
       }
     });
-
-    // this.setState({ timeContainer: [context.currentTime.toFixed(3)] });
   };
 
   onToggleBox = (i, row) => {
@@ -140,6 +136,7 @@ export default class App extends React.PureComponent {
   };
 
   onLengthChange = sequenceLength => {
+    // create a new checked array and push simple everyother note pattern
     const checked = [[], []];
     for (let i = 0; i < sequenceLength; i++) {
       checked[0].push(i === 0);
@@ -200,36 +197,38 @@ export default class App extends React.PureComponent {
   };
 
   handleTap = () => {
+    // timeContainer maintenance - shift and push
     const timeContainer = this.state.timeContainer;
-
     if (timeContainer.length > 2) timeContainer.shift();
     timeContainer.push(context.currentTime.toFixed(3));
-    // average difference between times
-    const timeDiffs = [];
-    for (let i = 0; i < timeContainer.length - 1; i++) {
-      timeDiffs.push(timeContainer[i + 1] - timeContainer[i]);
-    }
-    const avgTime = timeDiffs.reduce((a, b) => a + b, 0) / timeDiffs.length;
-    const tempo = Math.round(60 / avgTime);
-    console.log(tempo);
 
-    if (tempo > 40 && tempo < 301) {
+    // calculate tempo
+    const tempo = Math.round(
+      60 /
+        (timeContainer
+          .slice(1)
+          .map((time, i) => time - timeContainer[i])
+          .reduce((a, b) => a + b, 0) /
+          (timeContainer.length - 1))
+    );
+
+    // make sure tempo is within acceptable bounds
+    if (tempo > 40 && tempo < 301)
       this.setState({ tempo }, () => this.onTempoChange(tempo));
-    }
-    // const elapsedTime = Tone.Transport.seconds - this.state.lastTime,
-    //   lastTime = Tone.Transport.seconds,
-    //   tempo = elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
-    // this.setState({ elapsedTime, tempo, lastTime }, () =>
-    //   this.onTempoChange(tempo)
-    // );
   };
 
   onPitchSelect = (note, row) => {
-    const notes =
-      row === "0" ? [note, this.state.notes[1]] : [this.state.notes[0], note]; // fix this conditional
-    this.setState({ notes }, () => {
-      this.generateMetronome();
-    });
+    this.setState(
+      {
+        notes:
+          row === "0" // refactor this conditional
+            ? [note, this.state.notes[1]]
+            : [this.state.notes[0], note]
+      },
+      () => {
+        this.generateMetronome();
+      }
+    );
   };
 
   generateMetronome = () => {
@@ -284,9 +283,11 @@ export default class App extends React.PureComponent {
   };
 
   triggerVisualize = index => {
+    // generate array of 0's
     const length = this.state.sequenceLength;
     const isActive = [_.fill(Array(length), 0), _.fill(Array(length), 0)];
 
+    // set particular index as active
     isActive[0][index] = 1;
     isActive[1][index] = 1;
     this.setState({ isActive });

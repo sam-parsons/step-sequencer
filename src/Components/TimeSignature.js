@@ -12,7 +12,6 @@ const TimeSignature = props => (
         props.onLengthChange(e.target.value);
       }}
     >
-      {/* Is there a more functional way of creating these option elements? */}
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>

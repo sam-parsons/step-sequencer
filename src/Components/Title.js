@@ -1,10 +1,18 @@
 import React from "react";
 import styles from "./Title.module.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Title = () => (
   <div className={styles.root}>
     Step Sequencer
-    {/* <FontAwesomeIcon icon="info-circle" className={styles.info} /> */}
+    <div className={styles.info}>
+      ©2019{" "}
+      <a
+        href="https://github.com/sam-parsons/react-step-sequencer"
+        className={styles.link}
+      >
+        Sam Parsons
+      </a>
+    </div>
   </div>
 );
 
