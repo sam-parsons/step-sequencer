@@ -1,6 +1,5 @@
 .root {
   display: flex;
-  width: 60px;
   height: 60px;
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
@@ -8,8 +7,8 @@
   margin: 5px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   color: white;
-  align-items: center;
 }
 .label {
   margin: auto;
+  width: 60px;
 }

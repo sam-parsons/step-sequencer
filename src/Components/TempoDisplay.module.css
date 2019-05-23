@@ -1,6 +1,5 @@
 .root {
   display: flex;
-  width: 60px;
   height: 60px;
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
@@ -12,5 +11,7 @@
 }
 .label {
   margin: auto;
-  font-family: monospace;
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  width: 60px;
 }

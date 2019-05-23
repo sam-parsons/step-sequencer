@@ -1,8 +1,9 @@
 import React from "react";
 import BoxRow from "./BoxRow";
+import styles from "./StepSequence.module.css";
 
 const StepSequence = props => (
-  <div id="step-sequence">
+  <div id="step-sequence" className={styles.root}>
     <BoxRow
       checked={props.checked}
       onToggle={props.onToggle}

@@ -13,7 +13,7 @@
 .length {
   margin: 5px;
   outline: none;
-  background: #36363c;
+  background: transparent;
   color: white;
   padding: 1em;
   font-size: 18px;
@@ -22,5 +22,5 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border: 2px solid transparent;
-  font-family: monospace;
+  font-family: "Orbitron", sans-serif;
 }

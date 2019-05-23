@@ -1,15 +1,9 @@
 .root {
-  padding: 1em;
+  padding: 1em 0.5em;
   background: #28282c;
   border-radius: 4px;
   display: flex;
   margin-bottom: 1%;
   justify-content: space-between;
-  width: 450px;
-}
-.seqLength {
-  font-size: 50%;
-}
-.tempoDisplay {
-  font-size: 50%;
+  width: 500px;
 }
