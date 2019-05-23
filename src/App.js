@@ -11,12 +11,12 @@ import {
   faRecycle,
   faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
+import _ from "lodash";
 
 /**
  TODO
- - Visualizer
- - Pitch Selection - make reset function work / prevent same note from being selected twice
- - Tap Tempo
+ - Pitch Selection - prevent same note from being selected twice
+ - Tap Tempo - needs better accuracy - multiple previous time average rather than just previous and current
  */
 
 function toggleBox(priorChecked, i, row) {
@@ -41,6 +41,7 @@ export default class App extends React.PureComponent {
     isPlaying: false,
     sequenceLength: 7,
     tempo: 120,
+    isActive: [[0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0]],
     renderedNotes: [],
     partContainer: [],
     notes: ["Eb5", "C5"],
@@ -59,12 +60,25 @@ export default class App extends React.PureComponent {
         [true, false, false, false, false, false, false, false],
         [false, false, true, false, true, false, true, false]
       ],
-      notes: ["Eb5", "C5"]
+      notes: ["Eb5", "C5"],
+      isActive: [[0, 1, 0, 1, 0, 1, 0, 1], [0, 1, 0, 1, 0, 1, 0, 1]]
     }
   };
 
   componentDidMount = () => {
     this.generateMetronome();
+
+    // event listener for space bar
+    window.addEventListener("keydown", e => {
+      if (e.keyCode === 32 || e.keyCode === 13) {
+        try {
+          e.preventDefault(); // prevents space bar from triggering selected checkboxes
+          this.onTogglePlay();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    });
   };
 
   onToggleBox = (i, row) => {
@@ -155,7 +169,8 @@ export default class App extends React.PureComponent {
         sequenceLength: prior.defaults.sequenceLength,
         isPlaying: prior.defaults.isPlaying,
         checked: prior.defaults.checked,
-        notes: prior.defaults.notes
+        notes: prior.defaults.notes,
+        isActive: prior.defaults.isActive
       }),
       () => {
         this.resetTempo();
@@ -212,26 +227,30 @@ export default class App extends React.PureComponent {
         renderedNotes.push({
           note: note1,
           time: `0:${i / 2}`,
-          velocity: 0.05
+          velocity: 0.05,
+          index: i
         });
       } else if (!matrix[1][i]) {
         renderedNotes.push({
           note: note1,
           time: `0:${i / 2}`,
-          velocity: 0
+          velocity: 0,
+          index: i
         });
       }
       if (matrix[1][i]) {
         renderedNotes.push({
           note: note2,
           time: `0:${i / 2}`,
-          velocity: 0.05
+          velocity: 0.05,
+          index: i
         });
       }
     }
 
     // create new Part, start Part, push Part to container
     const part = new Tone.Part((time, value) => {
+      this.triggerVisualize(value.index);
       synth.triggerAttackRelease(value.note, 0.05, time, value.velocity);
     }, renderedNotes).start(0);
     partContainer.push(part);
@@ -240,6 +259,15 @@ export default class App extends React.PureComponent {
       renderedNotes,
       partContainer
     });
+  };
+
+  triggerVisualize = index => {
+    const length = this.state.sequenceLength;
+    const isActive = [_.fill(Array(length), 0), _.fill(Array(length), 0)];
+
+    isActive[0][index] = 1;
+    isActive[1][index] = 1;
+    this.setState({ isActive });
   };
 
   render() {
@@ -263,6 +291,7 @@ export default class App extends React.PureComponent {
             sequenceLength={this.state.sequenceLength}
             onPitchSelect={this.onPitchSelect}
             notes={this.state.notes}
+            isActive={this.state.isActive}
           />
         </header>
       </div>

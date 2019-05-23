@@ -1,7 +1,7 @@
-import _ from "lodash";
 import React from "react";
 import styles from "./BoxRow.module.css";
 import PitchSelect from "./PitchSelect";
+import Box from "./Box";
 
 const BoxRow = props => (
   <div className={styles.root}>
@@ -10,18 +10,12 @@ const BoxRow = props => (
       notes={props.notes}
       row={props.row}
     />
-    {_.map(props.checked[props.row], (isBoxChecked, i) => (
-      <div
-        onClick={() => {
-          props.onToggle(i, props.row);
-        }}
-        className={_.chain([styles.box, isBoxChecked && styles.checked])
-          .compact()
-          .join(" ")
-          .value()}
-        key={i}
-      />
-    ))}
+    <Box
+      checked={props.checked}
+      row={props.row}
+      isActive={props.isActive}
+      onToggle={props.onToggle}
+    />
   </div>
 );
 

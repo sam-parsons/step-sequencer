@@ -10,6 +10,7 @@ const StepSequence = props => (
       onPitchSelect={props.onPitchSelect}
       notes={props.notes}
       pitchConversion={props.pitchConversion}
+      isActive={props.isActive}
       row="0"
     />
     <BoxRow
@@ -18,6 +19,7 @@ const StepSequence = props => (
       sequenceLength={props.sequenceLength}
       onPitchSelect={props.onPitchSelect}
       notes={props.notes}
+      isActive={props.isActive}
       row="1"
     />
   </div>
