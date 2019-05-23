@@ -25,6 +25,8 @@ yarn
 yarn start
 ```
 
+### [Demo](https://sam-parsons.github.io/react-step-sequencer)
+
 ## Features
 
 - Variable sequence length
