@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e168bd1f0ce84eef3dbd9f6263235a9f",
+    "revision": "b7dd9f9c3b9ee1450e0e3ed3cb370f16",
     "url": "/react-step-sequencer/index.html"
   },
   {
