@@ -6,7 +6,7 @@
   </a>
 </p>
 
-<a href="https://github.com/sam-parsons/react-step-sequencer">
+<a href="https://sam-parsons.github.io/react-step-sequencer">
   <img src="./assets/screenshot.gif" alt="screenshot" width="100%" />
 </a>
 
@@ -24,3 +24,19 @@ yarn
 
 yarn start
 ```
+
+## Features
+
+- Variable sequence length
+- Variable pitches
+- Tap Tempo relies on separate AudioContext timer
+  -- works whether sequence is playing or not
+
+## Future Features
+
+- Idiomatic formatting of triple meters
+- Measure Sequencing
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
