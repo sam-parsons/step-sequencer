@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "95bfd3e11d9b1778b95ca45f09a03191",
+    "revision": "f199c9732d9e52433134d4c915113c7c",
     "url": "/react-step-sequencer/index.html"
   },
   {
-    "revision": "30f613263afa2153394f",
+    "revision": "7a37f3e094ade3ddcfb8",
     "url": "/react-step-sequencer/static/css/main.cbf787ab.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-step-sequencer/static/js/2.257ea082.chunk.js"
   },
   {
-    "revision": "30f613263afa2153394f",
-    "url": "/react-step-sequencer/static/js/main.74b74ce2.chunk.js"
+    "revision": "7a37f3e094ade3ddcfb8",
+    "url": "/react-step-sequencer/static/js/main.d577d1ad.chunk.js"
   },
   {
     "revision": "259fd9cb6f62cec0096f",
