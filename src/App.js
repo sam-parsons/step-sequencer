@@ -15,6 +15,7 @@ import _ from "lodash";
 
 /**
  TODO
+ - Visualizer - must clear on stop, sometimes gets stuck on highlighted checked square
  - Pitch Selection - prevent same note from being selected twice
  - Tap Tempo - needs better accuracy - multiple previous time average rather than just previous and current
  */
@@ -26,6 +27,7 @@ function toggleBox(priorChecked, i, row) {
 }
 
 const synth = new Tone.PolySynth(2, Tone.Synth).toMaster();
+const context = new AudioContext();
 
 library.add(faPlay);
 library.add(faStop);
@@ -49,6 +51,7 @@ export default class App extends React.PureComponent {
     lastTime: 0,
     numberOfTaps: 0,
     averageBPM: 0,
+    timeContainer: [],
     defaults: {
       tempo: 120,
       sequenceLength: 8,
@@ -79,6 +82,8 @@ export default class App extends React.PureComponent {
         }
       }
     });
+
+    // this.setState({ timeContainer: [context.currentTime.toFixed(3)] });
   };
 
   onToggleBox = (i, row) => {
@@ -103,7 +108,8 @@ export default class App extends React.PureComponent {
           Tone.Transport.stop();
           Tone.Transport.loop = false;
           Tone.Transport.loopEnd = 0;
-          console.log("stopped");
+          // isActive array zeroed out
+          this.setState({ isActive: [[], []] }, () => console.log("stopped"));
         } else {
           // configure looping for step sequencer
           Tone.Transport.loop = true;
@@ -194,12 +200,28 @@ export default class App extends React.PureComponent {
   };
 
   handleTap = () => {
-    const elapsedTime = Tone.Transport.seconds - this.state.lastTime,
-      lastTime = Tone.Transport.seconds,
-      tempo = elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
-    this.setState({ elapsedTime, tempo, lastTime }, () =>
-      this.onTempoChange(tempo)
-    );
+    const timeContainer = this.state.timeContainer;
+
+    if (timeContainer.length > 2) timeContainer.shift();
+    timeContainer.push(context.currentTime.toFixed(3));
+    // average difference between times
+    const timeDiffs = [];
+    for (let i = 0; i < timeContainer.length - 1; i++) {
+      timeDiffs.push(timeContainer[i + 1] - timeContainer[i]);
+    }
+    const avgTime = timeDiffs.reduce((a, b) => a + b, 0) / timeDiffs.length;
+    const tempo = Math.round(60 / avgTime);
+    console.log(tempo);
+
+    if (tempo > 40 && tempo < 301) {
+      this.setState({ tempo }, () => this.onTempoChange(tempo));
+    }
+    // const elapsedTime = Tone.Transport.seconds - this.state.lastTime,
+    //   lastTime = Tone.Transport.seconds,
+    //   tempo = elapsedTime > 2 ? this.state.tempo : Math.round(60 / elapsedTime);
+    // this.setState({ elapsedTime, tempo, lastTime }, () =>
+    //   this.onTempoChange(tempo)
+    // );
   };
 
   onPitchSelect = (note, row) => {
