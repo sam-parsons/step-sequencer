@@ -36,5 +36,8 @@
       "last 1 safari version"
     ]
   },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  },
   "homepage": "https://sam-parsons.github.io/react-step-sequencer/"
 }
