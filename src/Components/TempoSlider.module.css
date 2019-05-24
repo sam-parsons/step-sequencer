@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  width: 20vw;
+  width: 22vw;
 }
 @media (min-width: 900px) {
   .root {

@@ -10,7 +10,7 @@
 }
 .label {
   margin: auto;
-  width: 6vw;
+  width: 12vw;
 }
 @media (min-width: 900px) {
   .root {

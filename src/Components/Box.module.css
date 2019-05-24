@@ -7,8 +7,8 @@
 
 .box {
   display: block;
-  width: 6vw;
-  height: 6vw;
+  width: 7vw;
+  height: 7vw;
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
   cursor: pointer;

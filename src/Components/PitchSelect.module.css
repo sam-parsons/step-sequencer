@@ -23,3 +23,8 @@
   font-family: "Orbitron", sans-serif;
   font-size: 14px;
 }
+@media (max-width: 768px) {
+  .root {
+    display: none;
+  }
+}

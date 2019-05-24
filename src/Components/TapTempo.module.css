@@ -11,12 +11,13 @@
 }
 .label {
   font-family: "Orbitron", sans-serif;
-  font-size: 20px;
+  font-size: 3vw;
   margin: auto;
-  width: 9vw;
+  width: 14vw;
 }
 @media (min-width: 900px) {
   .label {
     width: 60px;
+    font-size: 20px;
   }
 }
