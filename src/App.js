@@ -15,10 +15,9 @@ import {
 
 /**
  TODO
- - Okasy now
  - Visualizer - must clear on stop, sometimes gets stuck on highlighted checked square
- - Pitch Selection - prevent same note from being selected twice
  - Eliminate use of layout.css (possibly)
+ - Mozilla/Safari rendering issues
  */
 
 function toggleBox(priorChecked, i, row) {
