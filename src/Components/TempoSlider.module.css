@@ -1,3 +1,9 @@
 .root {
   display: flex;
+  width: 20vw;
+}
+@media (min-width: 900px) {
+  .root {
+    width: 150px;
+  }
 }

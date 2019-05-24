@@ -32,7 +32,7 @@ yarn start
 - Variable sequence length
 - Variable pitches
 - Tap Tempo relies on separate AudioContext timer
-  -- works whether sequence is playing or not
+  - Works whether sequence is playing or not
 
 ## Future Features
 
