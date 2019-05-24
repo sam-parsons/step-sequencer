@@ -16,7 +16,6 @@ import {
 /**
  TODO
  - Visualizer - must clear on stop, sometimes gets stuck on highlighted checked square
- - Eliminate use of layout.css (possibly)
  - Mozilla/Safari rendering issues
  */
 

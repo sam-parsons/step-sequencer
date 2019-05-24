@@ -2,6 +2,33 @@
   display: flex;
   width: 22vw;
 }
+.slider {
+  margin: auto 1%;
+  -webkit-appearance: none;
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
+  border-radius: 0;
+}
+.slider:focus {
+  outline: none;
+}
+.slider::-webkit-slider-runnable-track {
+  background: #787885;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; /* 1 */
+  height: 40px;
+  background: #cbff8b;
+  box-shadow: -100vw 0 0 100vw hsl(240, 5%, 22%);
+}
+.slider:focus::-webkit-slider-runnable-track {
+  background: #b6b6b6;
+}
+
 @media (min-width: 900px) {
   .root {
     width: 150px;
