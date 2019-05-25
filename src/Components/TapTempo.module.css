@@ -15,8 +15,3 @@
   margin: auto;
   width: 60px;
 }
-@media (min-width: 900px) {
-  .label {
-    font-size: 20px;
-  }
-}

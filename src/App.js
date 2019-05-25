@@ -63,7 +63,7 @@ export default class App extends React.PureComponent {
       notes: ["Eb5", "C5"],
       isActive: [[0, 1, 0, 1, 0, 1, 0, 1], [0, 1, 0, 1, 0, 1, 0, 1]]
     },
-    orientation: true
+    landscape: false
   };
 
   componentDidMount = () => {
@@ -78,6 +78,20 @@ export default class App extends React.PureComponent {
         } catch (e) {
           console.log(e);
         }
+      }
+    });
+
+    // check for orientation, add event listener
+    if (
+      Math.abs(window.screen.orientation.angle) === 90 &&
+      window.screen.height < 500
+    )
+      this.setState({ landscape: true });
+    window.addEventListener("orientationchange", () => {
+      if (Math.abs(window.screen.orientation.angle) !== 90) {
+        this.setState({ landscape: false });
+      } else if (window.screen.height < 500) {
+        this.setState({ landscape: true });
       }
     });
   };
@@ -297,7 +311,7 @@ export default class App extends React.PureComponent {
     return (
       <div className="App">
         <header className="App-header">
-          <Title />
+          <Title landscape={this.state.landscape} />
           <Buttons
             isPlaying={this.state.isPlaying}
             onTogglePlay={this.onTogglePlay}

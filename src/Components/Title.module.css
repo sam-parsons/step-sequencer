@@ -5,7 +5,7 @@
   display: flex;
   margin-bottom: 1%;
   font-family: "Audiowide", cursive;
-  font-size: 9vw;
+  font-size: 7vw;
   color: #b9ff62;
   align-items: flex-end;
   position: relative;
@@ -16,6 +16,9 @@
   color: rgb(148, 148, 148);
   position: absolute;
   right: 5px;
+}
+.landscape {
+  display: none;
 }
 @media (min-width: 500px) {
   .root {

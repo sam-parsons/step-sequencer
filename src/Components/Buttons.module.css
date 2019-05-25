@@ -12,7 +12,7 @@
 .wrapperBottom {
   display: inline-flex;
 }
-@media (max-width: 787px) {
+@media (max-width: 640px) {
   .root {
     display: grid;
   }
