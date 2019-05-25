@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  width: 60px;
+  max-width: 60px;
   height: 60px;
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
@@ -13,6 +13,7 @@
 .length {
   margin: 5px;
   outline: none;
+  height: 60px;
   background: transparent;
   color: white;
   padding: 1em;

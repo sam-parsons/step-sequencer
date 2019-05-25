@@ -10,7 +10,7 @@
   align-items: center;
 }
 .label {
-  width: 6vw;
+  width: 60px;
   margin: auto;
 }
 @media (min-width: 900px) {

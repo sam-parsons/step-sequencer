@@ -62,7 +62,8 @@ export default class App extends React.PureComponent {
       ],
       notes: ["Eb5", "C5"],
       isActive: [[0, 1, 0, 1, 0, 1, 0, 1], [0, 1, 0, 1, 0, 1, 0, 1]]
-    }
+    },
+    orientation: true
   };
 
   componentDidMount = () => {

@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  width: 22vw;
+  width: 150px;
 }
 .slider {
   margin: auto 1%;
@@ -27,10 +27,4 @@
 }
 .slider:focus::-webkit-slider-runnable-track {
   background: #b6b6b6;
-}
-
-@media (min-width: 900px) {
-  .root {
-    width: 150px;
-  }
 }

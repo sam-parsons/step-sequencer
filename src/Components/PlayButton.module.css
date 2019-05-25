@@ -10,10 +10,10 @@
 }
 .label {
   margin: auto;
-  width: 12vw;
+  width: 60px;
 }
-@media (min-width: 900px) {
+@media (max-width: 787px) {
   .root {
-    width: 60px;
+    width: 100%;
   }
 }
