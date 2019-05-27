@@ -27,6 +27,10 @@ yarn start
 
 ### [Demo](https://sam-parsons.github.io/react-step-sequencer)
 
+## Coverage
+
+- Chrome 74, Firefox 67, Safari 11
+
 ## Features
 
 - Variable sequence length

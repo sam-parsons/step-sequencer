@@ -12,6 +12,7 @@ import {
   faRecycle,
   faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
+import StartAudioContext from "startaudiocontext";
 
 /**
  TODO
@@ -68,6 +69,8 @@ export default class App extends React.PureComponent {
 
   componentDidMount = () => {
     this.generateMetronome();
+
+    StartAudioContext(Tone.context);
 
     // event listener for space bar
     window.addEventListener("keydown", e => {
@@ -263,7 +266,7 @@ export default class App extends React.PureComponent {
         renderedNotes.push({
           note: note1,
           time: `0:${i / 2}`,
-          velocity: 0.05,
+          velocity: 0.1,
           index: i
         });
       } else if (!matrix[1][i]) {
@@ -278,7 +281,7 @@ export default class App extends React.PureComponent {
         renderedNotes.push({
           note: note2,
           time: `0:${i / 2}`,
-          velocity: 0.05,
+          velocity: 0.1,
           index: i
         });
       }
