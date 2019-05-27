@@ -83,6 +83,7 @@ export default class App extends React.PureComponent {
 
     // check for orientation, add event listener
     if (
+      window.screen.orientation &&
       Math.abs(window.screen.orientation.angle) === 90 &&
       window.screen.height < 500
     )
