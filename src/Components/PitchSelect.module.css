@@ -22,6 +22,8 @@
   border: 2px solid transparent;
   font-family: "Orbitron", sans-serif;
   font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 @media (max-width: 768px) {
   .root {

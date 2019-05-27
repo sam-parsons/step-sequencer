@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  max-width: 60px;
+  max-width: 70px;
   height: 60px;
   background: hsl(240, 5%, 22%);
   border-radius: 4px;
@@ -24,4 +24,6 @@
   cursor: pointer;
   border: 2px solid transparent;
   font-family: "Orbitron", sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
