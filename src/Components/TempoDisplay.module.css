@@ -12,7 +12,7 @@
 .label {
   margin: auto;
   font-family: "Orbitron", sans-serif;
-  font-size: 3vw;
+  font-size: 18px;
   width: 60px;
 }
 @media (min-width: 900px) {
