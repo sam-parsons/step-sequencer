@@ -17,7 +17,7 @@ import StartAudioContext from "startaudiocontext";
 /**
  TODO
  - Visualizer - must clear on stop, sometimes gets stuck on highlighted checked square
- - Mozilla/Safari rendering issues
+ - Tooltips for Play and Tap buttons 
  */
 
 function toggleBox(priorChecked, i, row) {
@@ -27,6 +27,7 @@ function toggleBox(priorChecked, i, row) {
 }
 
 // what are correct places for these?
+// creates a global synth and context
 const synth = new Tone.PolySynth(2, Tone.Synth).toMaster();
 const context = new AudioContext();
 
@@ -45,6 +46,7 @@ export default class App extends React.PureComponent {
     isPlaying: false,
     sequenceLength: 7, // length of sequence pattern
     tempo: 120,
+    maxTempo: 300,
     isActive: [[0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0]], // used for highlighting suring visualization
     renderedNotes: [],
     partContainer: [], // store Part object for future removal
@@ -70,14 +72,23 @@ export default class App extends React.PureComponent {
   componentDidMount = () => {
     this.generateMetronome();
 
+    // starts both audio contexts on mounting
     StartAudioContext(Tone.context);
+    StartAudioContext(context);
 
-    // event listener for space bar
+    // event listener for space, enter and 't'
     window.addEventListener("keydown", e => {
       if (e.keyCode === 32 || e.keyCode === 13) {
         try {
           e.preventDefault(); // prevents space bar from triggering selected checkboxes
           this.onTogglePlay();
+        } catch (e) {
+          console.log(e);
+        }
+      } else if (e.keyCode === 84) {
+        try {
+          e.preventDefault(); // prevents space bar from triggering selected checkboxes
+          this.handleTap();
         } catch (e) {
           console.log(e);
         }
@@ -231,8 +242,13 @@ export default class App extends React.PureComponent {
     );
 
     // make sure tempo is within acceptable bounds
-    if (tempo > 40 && tempo < 301)
+    if (tempo > 40 && tempo < 301) {
       this.setState({ tempo }, () => this.onTempoChange(tempo));
+    } else if (tempo > 300) {
+      this.setState({ tempo: this.state.maxTempo }, () =>
+        this.onTempoChange(this.state.tempo)
+      );
+    }
   };
 
   onPitchSelect = (note, row) => {

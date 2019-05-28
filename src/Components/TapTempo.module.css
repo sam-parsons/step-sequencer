@@ -14,4 +14,10 @@
   font-size: 20px;
   margin: auto;
   width: 60px;
+  /* Disables text selection on on span */
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
