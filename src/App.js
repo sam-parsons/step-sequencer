@@ -66,7 +66,8 @@ export default class App extends React.PureComponent {
       notes: ["Eb5", "C5"],
       isActive: [[0, 1, 0, 1, 0, 1, 0, 1], [0, 1, 0, 1, 0, 1, 0, 1]]
     },
-    landscape: false
+    landscape: false,
+    velocity: 0.1
   };
 
   componentDidMount = () => {
@@ -273,22 +274,24 @@ export default class App extends React.PureComponent {
     // metronome vitals
     const [note1, note2] = this.state.notes,
       seqLength = this.state.sequenceLength,
-      matrix = this.state.checked;
+      matrix = this.state.checked,
+      velocity = this.state.velocity;
 
     // new renderedNotes array, populate
     const renderedNotes = [];
     for (let i = 0; i < seqLength; i++) {
+      const time = i / 2;
       if (matrix[0][i]) {
         renderedNotes.push({
           note: note1,
-          time: `0:${i / 2}`,
-          velocity: 0.1,
+          time: `0:${time}`,
+          velocity: velocity,
           index: i
         });
       } else if (!matrix[1][i]) {
         renderedNotes.push({
           note: note1,
-          time: `0:${i / 2}`,
+          time: `0:${time}`,
           velocity: 0,
           index: i
         });
@@ -296,8 +299,8 @@ export default class App extends React.PureComponent {
       if (matrix[1][i]) {
         renderedNotes.push({
           note: note2,
-          time: `0:${i / 2}`,
-          velocity: 0.1,
+          time: `0:${time}`,
+          velocity: velocity,
           index: i
         });
       }
