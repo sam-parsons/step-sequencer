@@ -1,10 +1,10 @@
 <br>
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://github.com/sam-parsons/react-step-sequencer">
     <img src="./assets/logo.png" alt="logo" width="80" />
   </a>
-</p>
+</p> -->
 
 <a href="https://sam-parsons.github.io/react-step-sequencer">
   <img src="./assets/screenshot.gif" alt="screenshot" width="100%" />
