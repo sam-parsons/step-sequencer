@@ -27,22 +27,17 @@ yarn start
 
 ### [Demo](https://sam-parsons.github.io/react-step-sequencer)
 
-## Coverage
-
-- Chrome 74, Firefox 67, Safari 11
-
-## Features
+#### Features
 
 - Variable sequence length
 - Variable pitches
 - Tap Tempo relies on separate AudioContext timer
   - Works whether sequence is playing or not
 
-## Future Features
+#### Coverage
 
-- Idiomatic formatting of triple meters
-- Measure Sequencing
+- Chrome 74, Firefox 67, Safari 11
 
-## License
+#### License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
