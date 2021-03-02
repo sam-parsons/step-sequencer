@@ -1,12 +1,12 @@
 <br>
 
 <!-- <p align="center">
-  <a href="https://github.com/sam-parsons/react-step-sequencer">
+  <a href="https://github.com/sam-parsons/step-sequencer">
     <img src="./assets/logo.png" alt="logo" width="80" />
   </a>
 </p> -->
 
-<a href="https://sam-parsons.github.io/react-step-sequencer">
+<a href="https://sam-parsons.github.io/step-sequencer">
   <img src="./assets/screenshot.gif" alt="screenshot" width="100%" />
 </a>
 
@@ -16,16 +16,16 @@
 ## Installation
 
 ```sh
-git clone https://github.com/sam-parsons/react-step-sequencer.git
+git clone https://github.com/sam-parsons/step-sequencer.git
 
-cd react-step-sequencer/
+cd step-sequencer/
 
 yarn
 
 yarn start
 ```
 
-### [Demo](https://sam-parsons.github.io/react-step-sequencer)
+### [Demo](https://sam-parsons.github.io/step-sequencer)
 
 #### Features
 
