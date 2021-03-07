@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-step-sequencer/static/css/main.55ffa971.chunk.css",
-    "main.js": "/react-step-sequencer/static/js/main.aa7404a6.chunk.js",
-    "main.js.map": "/react-step-sequencer/static/js/main.aa7404a6.chunk.js.map",
-    "runtime~main.js": "/react-step-sequencer/static/js/runtime~main.d3dc9fc2.js",
-    "runtime~main.js.map": "/react-step-sequencer/static/js/runtime~main.d3dc9fc2.js.map",
-    "static/js/2.478ffd32.chunk.js": "/react-step-sequencer/static/js/2.478ffd32.chunk.js",
-    "static/js/2.478ffd32.chunk.js.map": "/react-step-sequencer/static/js/2.478ffd32.chunk.js.map",
-    "index.html": "/react-step-sequencer/index.html",
-    "precache-manifest.35e61925e5680cb7636ae1bd5fedf5df.js": "/react-step-sequencer/precache-manifest.35e61925e5680cb7636ae1bd5fedf5df.js",
-    "service-worker.js": "/react-step-sequencer/service-worker.js",
-    "static/css/main.55ffa971.chunk.css.map": "/react-step-sequencer/static/css/main.55ffa971.chunk.css.map"
+    "main.css": "/step-sequencer/static/css/main.55ffa971.chunk.css",
+    "main.js": "/step-sequencer/static/js/main.aa7404a6.chunk.js",
+    "main.js.map": "/step-sequencer/static/js/main.aa7404a6.chunk.js.map",
+    "runtime~main.js": "/step-sequencer/static/js/runtime~main.f37c02fa.js",
+    "runtime~main.js.map": "/step-sequencer/static/js/runtime~main.f37c02fa.js.map",
+    "static/js/2.478ffd32.chunk.js": "/step-sequencer/static/js/2.478ffd32.chunk.js",
+    "static/js/2.478ffd32.chunk.js.map": "/step-sequencer/static/js/2.478ffd32.chunk.js.map",
+    "index.html": "/step-sequencer/index.html",
+    "precache-manifest.6a753a12edd8d501dede46357859d232.js": "/step-sequencer/precache-manifest.6a753a12edd8d501dede46357859d232.js",
+    "service-worker.js": "/step-sequencer/service-worker.js",
+    "static/css/main.55ffa971.chunk.css.map": "/step-sequencer/static/css/main.55ffa971.chunk.css.map"
   }
 }
